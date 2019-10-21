@@ -4,8 +4,10 @@ import requests
 import pandas as pd
 from datetime import datetime
 
-key = 'XXX'
+key = 'XXXXX'
 search_term = 'meermin'
+
+### Implement misspelling checker algorithm
 
 ### Finding service - using findItemsByKeywords API call
 url = ('https://svcs.ebay.com/services/search/FindingService/v1\
@@ -22,7 +24,7 @@ apiResult = requests.get(url)
 parsed = apiResult.text[28:-1]  
 translated_to_json = json.loads(parsed)
 
-### Parsing response into dataframe
+### Parsing response into a dataframe
 tab = []
 for item in (translated_to_json["findItemsByKeywordsResponse"][0]["searchResult"][0]["item"]):
     title = item["title"][0]
