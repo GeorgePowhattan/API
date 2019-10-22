@@ -1,5 +1,8 @@
 # Clone from alfwatt/FatFingers : https://github.com/alfwatt/FatFingers
 
+DELETE = -1 # removes a character in the string
+CAPS_LOCK = 1 # change the remaning characters to ALL CAPS
+
 quertyKeyNeighbors = {
     # row 1
     '`':  ['1', '\t'],

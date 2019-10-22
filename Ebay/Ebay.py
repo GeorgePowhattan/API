@@ -4,6 +4,9 @@ import requests
 import pandas as pd
 from datetime import datetime
 
+import misspellings
+import neighbour_keys
+
 key = 'XXX'
 search_term = 'meermin'
 
