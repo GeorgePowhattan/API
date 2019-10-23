@@ -1,43 +1,34 @@
 class Misspellings:
-
-    def __init__(self, item):
-        
+    
     # string -> tsring, srting, stirng
     def rotation(self, item):
-        res = []
+        variation = []
         for i in range(0, len(item)-1):
-            res.append(item[0:i] + item[i:i+2][::-1] + item[i+2:])
-        return res
+            variation.append(item[0:i] + item[i:i+2][::-1] + item[i+2:])
+        return variation
 
     # sring, sting, strng 
     def missing(self, item):
-        res = []
+        variation = []
         for i in range(0, len(item)-1):
-            res.append(item.replace(item[i],''))
-        return res
+            variation.append(item.replace(item[i],''))
+        return variation
 
     # sttring, strring, striing
     def adding(self, item):
-        res = []
+        variation = []
         for i in range(0, len(item)-1):
-            res.append(item.replace(item[i],item[i]*2))
-        return res
+            variation.append(item.replace(item[i],item[i]*2))
+        return variation
 
     # dtring, aring        
     def fat_fingers(self, item):
-        res = []
-        for i in range(0, len(item)-1):
-            res.append()
-        return res
-
+        pass     # neighbouring keys - to be implemented
+            
+            
     def misspelling(self, item):
-        res = []
-        self.rotation(item)
-        self.missing(item)
-        self.adding(item)
-        #fat_fingers(item)
+        res = item
+        res += ',' + ','.join(word for word in self.rotation(item))
+        res += ',' + ','.join(word for word in self.missing(item))
+        res += ',' + ','.join(word for word in self.adding(item))
         return res
-
-string = Misspellings()
-
-print(string.misspellings('string'))
