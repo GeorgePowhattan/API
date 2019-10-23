@@ -24,11 +24,10 @@ class Misspellings:
     # dtring, aring        
     def fat_fingers(self, item):
         pass     # neighbouring keys - to be implemented
-            
-            
+             
     def misspelling(self, item):
-        res = item
-        res += ',' + ','.join(word for word in self.rotation(item))
-        res += ',' + ','.join(word for word in self.missing(item))
-        res += ',' + ','.join(word for word in self.adding(item))
-        return res
+        search_term = item
+        search_term += ',' + ','.join(word for word in self.rotation(item))
+        search_term += ',' + ','.join(word for word in self.missing(item))
+        search_term += ',' + ','.join(word for word in self.adding(item))
+        return search_term
