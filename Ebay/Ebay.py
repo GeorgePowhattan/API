@@ -7,6 +7,9 @@ from misspellings import Misspellings
 # EbayAPI will fetch you data about your desired item including a misspellings class to find out potentially attractive deals.
 # EbayAPI will output the found items and data into a pandas dataframe.
 
+def get_global_ID():
+    
+
 def construct_url(search_term):
     url = 'https://svcs.ebay.com/services/search/FindingService/v1\
     ?SECURITY-APPNAME=OndejMar-PrvniApl-PRD-6d8cefb65-8ed3ffd7\
