@@ -4,10 +4,8 @@ import pandas as pd
 from datetime import datetime
 from misspellings import Misspellings
 
-
-# def search_term_variations(item):
-#    search_term = Misspellings().misspelling(item)
-#    return search_term
+# EbayAPI will fetch you data about your desired item including a misspellings class to find out potentially attractive deals.
+# EbayAPI will output the found items and data into a pandas dataframe.
 
 def construct_url(search_term):
     url = 'https://svcs.ebay.com/services/search/FindingService/v1\
