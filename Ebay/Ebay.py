@@ -11,14 +11,20 @@ def get_global_ID():
     
 
 def construct_url(search_term):
+    
+    # Select country ID: e.g. EBAY-US
+    df_country_code = pd.read_csv('EbayGlobalID.csv',delimiter=';')
+    country_map = dict(zip(df_country_code['Territory'], df_country_code['Global ID']))
+    country_code = input()
+    
     url = 'https://svcs.ebay.com/services/search/FindingService/v1\
-    ?SECURITY-APPNAME=OndejMar-PrvniApl-PRD-6d8cefb65-8ed3ffd7\
+    ?SECURITY-APPNAME=OndejMar-PrvniApl-PRD-6d8cefb65-8ed3ffd7\       
     &OPERATION-NAME=findItemsByKeywords\
     &SERVICE-VERSION=1.13.0\
     &RESPONSE-DATA-FORMAT=JSON\
     &callback=_cb_findItemsByKeywords\
     &REST-PAYLOAD\
-    &GLOBAL-ID=EBAY-US\
+    &GLOBAL-ID=' + country_code + '\
     &keywords=' + search_term
     return url
 
