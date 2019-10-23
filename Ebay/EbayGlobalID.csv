@@ -1,0 +1,23 @@
+Global ID;Language;Territory;Site Name;eBay Site ID
+EBAY-AT;de-AT;AT;eBay Austria;16
+EBAY-AU;en-AU;AU;eBay Australia;15
+EBAY-CH;de-CH;CH;eBay Switzerland;193
+EBAY-DE;en-DE;DE;eBay Germany;77
+EBAY-ENCA;en-CA;CA;eBay Canada (English);2
+EBAY-ES;es-ES;ES;eBay Spain;186
+EBAY-FR;fr-FR;FR;eBay France;71
+EBAY-FRBE;fr-BE;BE;eBay Belgium (French);23
+EBAY-FRCA;fr-CA;CA;eBay Canada (French);210
+EBAY-GB;en-GB;GB;eBay UK;3
+EBAY-HK;zh-Hant;HK;eBay Hong Kong;201
+EBAY-IE;en-IE;IE;eBay Ireland;205
+EBAY-IN;en-IN;IN;eBay India;203
+EBAY-IT;it-IT;IT;eBay Italy;101
+EBAY-MOTOR;en-US;US;eBay Motors;100
+EBAY-MY;en-MY;MY;eBay Malaysia;207
+EBAY-NL;nl-NL;NL;eBay Netherlands;146
+EBAY-NLBE;nl-BE;BE;eBay Belgium (Dutch);123
+EBAY-PH;en-PH;PH;eBay Philippines;211
+EBAY-PL;pl-PL;PL;eBay Poland;212
+EBAY-SG;en-SG;SG;eBay Singapore;216
+EBAY-US;en-US;US;eBay United States;0
