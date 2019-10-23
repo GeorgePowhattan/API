@@ -3,19 +3,26 @@ import requests
 import pandas as pd
 from datetime import datetime
 from misspellings import Misspellings
+# from ... import *
 
 # EbayAPI will fetch you data about your desired item including a misspellings class to find out potentially attractive deals.
 # EbayAPI will output the found items and data into a pandas dataframe.
 
-def get_global_ID():
+def search_conditions():
+    conditions = {}
     
+    conditions[search_term] = ...
+    conditions[country_code] =
+    conditions[buying_format] =
+    
+    return conditions
 
 def construct_url(search_term):
     
-    # Select country ID: e.g. EBAY-US
+    # Look-up country ID e.g. EBAY-US
     df_country_code = pd.read_csv('EbayGlobalID.csv',delimiter=';')
     country_map = dict(zip(df_country_code['Territory'], df_country_code['Global ID']))
-    country_code = input()
+    country_code = country_map[input()]
     
     url = 'https://svcs.ebay.com/services/search/FindingService/v1\
     ?SECURITY-APPNAME=OndejMar-PrvniApl-PRD-6d8cefb65-8ed3ffd7\       
