@@ -1,11 +1,12 @@
 import json
 import requests
-import pandas as pd
 from datetime import datetime
-from misspellings import Misspellings
-# from ... import *
+import pandas as pd
 
-# EbayAPI will fetch you data about your desired item including a misspellings class to find out potentially attractive deals.
+from misspellings import Misspellings
+# from user_input import UserInput
+
+# EbayAPI will fetch data about your desired item including possibke misspellings to find out potentially attractive deals.
 # EbayAPI will output the found items and data into a pandas dataframe.
 
 def search_conditions():
@@ -81,7 +82,7 @@ if __name__ == "__main__":
     response_to_parse = apiResult.text[28:-1] 
     translated_to_json = json.loads(response_to_parse)
 
-    ### Parsing the response
+    # Parsing the response
     parsed = parse_response(translated_to_json)
     
     
