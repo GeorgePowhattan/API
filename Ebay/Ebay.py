@@ -4,42 +4,34 @@ from datetime import datetime
 import pandas as pd
 
 from misspellings import Misspellings
-# from user_input import UserInput
 
-# EbayAPI will fetch data about your desired item including possibke misspellings to find out potentially attractive deals.
+# EbayAPI will fetch data about your desired item including possible misspellings to find potentially attractive deals.
 # EbayAPI will output the found items and data into a pandas dataframe.
 
-def search_conditions():
-    conditions = {}
-    
-    conditions[search_term] = ...
-    conditions[country_code] =
-    conditions[buying_format] =
-    
-    return conditions
+# url='https://svcs.ebay.com/services/search/FindingService/v1?SECURITY-APPNAME=OndejMar-PrvniApl-PRD-6d8cefb65-8ed3ffd7&OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&RESPONSE-DATA-FORMAT=JSON&callback=_cb_findItemsByKeywords&REST-PAYLOAD&keywords=iPhone&paginationInput.entriesPerPage=6&GLOBAL-ID=EBAY-US&siteid=0'
 
-def construct_url(search_term):
+def construct_url(search_term, country):
     
     # Look-up country ID e.g. EBAY-US
     df_country_code = pd.read_csv('EbayGlobalID.csv',delimiter=';')
-    country_map = dict(zip(df_country_code['Territory'], df_country_code['Global ID']))
-    country_code = country_map[input()]
+    country_map = dict(zip(df_country_code['Site Name'], df_country_code['Global ID']))
+    if country in country_map.values:
+        country_code = country
+    else:
+        country_code = 'EBAY-DE'
     
-    url = 'https://svcs.ebay.com/services/search/FindingService/v1\
-    ?SECURITY-APPNAME=OndejMar-PrvniApl-PRD-6d8cefb65-8ed3ffd7\       
+    url = ('https://svcs.ebay.com/services/search/FindingService/v1?SECURITY-APPNAME=OndejMar-PrvniApl-PRD-6d8cefb65-8ed3ffd7\
     &OPERATION-NAME=findItemsByKeywords\
     &SERVICE-VERSION=1.13.0\
     &RESPONSE-DATA-FORMAT=JSON\
     &callback=_cb_findItemsByKeywords\
     &REST-PAYLOAD\
     &GLOBAL-ID=' + country_code + '\
-    &keywords=' + search_term
-    return url
-
-# parameters of the item we want to get
-parameters = [title,category,location,condition,buying_format,price,currency,shipping,payment,ending]  
+    &keywords=' + search_term )
     
-def parse_response():
+    return url
+    
+def parse_response(translated_to_json):
     table = []
     for item in (translated_to_json["findItemsByKeywordsResponse"][0]["searchResult"][0]["item"]):
         title = item["title"][0]
@@ -64,16 +56,53 @@ def parse_response():
 
 if __name__ == "__main__":
     
-    key = 'XXX'
-    # Item to search for on Ebay
     
+    print("\n"+ "*"*15)
+    print("Welcome to Ebay finder & misspellings checker!")
+    print("*"*15 + "\n")
+    print("Please enter the item you wish to buy.")
     desired_item = input()
-    # Include misspellings and other variations of the search term
     
+    print("Please enter the Ebay country code to search. If omitted, Germany will be selected by default")
+    print('\
+    EBAY-AT	:	eBay Austria\
+    EBAY-AU	:	eBay Australia\
+    EBAY-CH	:	eBay Switzerland\
+    EBAY-DE	:	eBay Germany\
+    EBAY-ENCA	:	eBay Canada (English)\
+    EBAY-ES	:	eBay Spain\
+    EBAY-FR	:	eBay France\
+    EBAY-FRBE	:	eBay Belgium (French)\
+    EBAY-FRCA	:	eBay Canada (French)\
+    EBAY-GB	:	eBay UK\
+    EBAY-HK	:	eBay Hong Kong\
+    EBAY-IE	:	eBay Ireland\
+    EBAY-IN	:	eBay India\
+    EBAY-IT	:	eBay Italy\
+    EBAY-MOTOR	:	eBay Motors\
+    EBAY-MY	:	eBay Malaysia\
+    EBAY-NL	:	eBay Netherlands\
+    EBAY-NLBE	:	eBay Belgium (Dutch)\
+    EBAY-PH	:	eBay Philippines\
+    EBAY-PL	:	eBay Poland\
+    EBAY-SG	:	eBay Singapore\
+    EBAY-US	:	eBay United States')
+
+    country = input()
+    
+    print("Please enter the buying format:")
+    print("a = auction only")
+    print("b = auction and direct purchase")
+    buying_format = input()
+    
+    
+    key = '0e3601c9-4b61-48f8-9851-641301c57c26'
+    
+    # Include misspellings and other variations of the search term
     search_term = Misspellings().misspelling(desired_item)
     
     # Construct the url - using findItemsByKeywords API call
-    url = get_url(search_term)
+    url = construct_url(search_term, country)
     
     # Get a response from Ebay API
     apiResult = requests.get(url)
@@ -82,14 +111,16 @@ if __name__ == "__main__":
     response_to_parse = apiResult.text[28:-1] 
     translated_to_json = json.loads(response_to_parse)
 
+    # parameters of the item we want to get
+    # parameters = [title,category,location,condition,buying_format,price,currency,shipping,payment,ending]
+
     # Parsing the response
     parsed = parse_response(translated_to_json)
-    
     
 
 
     # Create a dataframe
-    df = pd.DataFrame(data=tab,columns=['title','category','location','condition','buying_format','price','currency','shipping','payment','ending'])
+    df = pd.DataFrame(data=parse_response,columns=['title','category','location','condition','buying_format','price','currency','shipping','payment','ending'])
 
     ### CONVERTING data formats
     df['price'] = pd.to_numeric(df['price'])
@@ -108,3 +139,4 @@ if __name__ == "__main__":
     df.sort_values(by=sorting_var,kind='quicksort')
 
     print(df)
+    df.to_excel("Ebay.xlsx")
