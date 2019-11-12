@@ -15,7 +15,7 @@ def construct_url(search_term, country):
     # Look-up country ID e.g. EBAY-US
     df_country_code = pd.read_csv('EbayGlobalID.csv',delimiter=';')
     country_map = dict(zip(df_country_code['Site Name'], df_country_code['Global ID']))
-    if country in country_map.values:
+    if country in country_map.values():
         country_code = country
     else:
         country_code = 'EBAY-DE'
@@ -139,4 +139,4 @@ if __name__ == "__main__":
     df.sort_values(by=sorting_var,kind='quicksort')
 
     print(df)
-    df.to_excel("Ebay.xlsx")
+    df.to_excel("EbaySavedDf.xlsx")
