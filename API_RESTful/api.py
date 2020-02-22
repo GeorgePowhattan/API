@@ -20,6 +20,14 @@ tasks = [
     }
 ]
 
+'''
+class Task(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(80))
+    description = db.Column(db.Text)
+    done = db.Column(db.Boolean)
+'''
+
 def make_public_task(task):    # help function to fetch the uri, not task 'id' - which needs to be entered as an argument into todo/api/v1.0/tasks/<int:task_id> querry
     new_task = {}
     for field in task:          # id, title, description, ...
