@@ -19,8 +19,8 @@ tasks = [
         'done': False
     }
 ]
-  
-def make_public_task(task):    # to fetch the uri, not task 'id' - which needs to be entered as an argument into todo/api/v1.0/tasks/<int:task_id> querry
+
+def make_public_task(task):    # help function to fetch the uri, not task 'id' - which needs to be entered as an argument into todo/api/v1.0/tasks/<int:task_id> querry
     new_task = {}
     for field in task:          # id, title, description, ...
         if field == 'id':
